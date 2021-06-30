@@ -1,0 +1,16 @@
+[package]
+name = "rq"
+version = "0.1.0"
+edition = "2018"
+description = "Tool for making HTTP requests"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.reqwest]
+version = "*"
+default-features = false
+features = ["rustls-tls-native-roots", "json", "gzip", "brotli"]
+
+[dependencies]
+tokio = { version = "*", features = ["full"] }
+thiserror = "*"
