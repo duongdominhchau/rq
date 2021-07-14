@@ -1,6 +1,9 @@
 use reqwest::Client;
 use std::time::Duration;
 
+mod cli;
+mod http;
+
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("ReqwestError")]
@@ -20,8 +23,14 @@ fn create_client(timeout: Duration) -> Result<Client> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    let args = cli::args();
     let client = create_client(Duration::from_millis(5000))?;
-    let res = client.get("https://example.com").send().await?.text().await?;
+    let res = client
+        .request(args.method.into(), args.url)
+        .send()
+        .await?
+        .text()
+        .await?;
     println!("{}", res);
     Ok(())
 }

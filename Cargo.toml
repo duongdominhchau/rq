@@ -13,4 +13,5 @@ features = ["rustls-tls-native-roots", "json", "gzip", "brotli"]
 
 [dependencies]
 tokio = { version = "*", features = ["full"] }
-thiserror = "*"
+thiserror = { version = "*" }
+structopt = { version = "*" }
